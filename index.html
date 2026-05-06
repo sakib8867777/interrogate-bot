@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SkyPay Telegram Middleware | Documentation</title>
+    <title>SB_Pay Telegram Middleware | Documentation</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -649,7 +649,7 @@
         <div class="nav-content">
             <a href="#" class="brand">
                 <div class="brand-logo">S</div>
-                SkyPay
+                SB_Pay
             </a>
             <div class="nav-links">
                 <a href="#features">Features</a>
@@ -664,7 +664,7 @@
     <section class="hero" id="home">
         <div class="container">
             <h1>Telegram Bot Payments<br><span>Simplified.</span></h1>
-            <p>A lightweight, serverless bridge seamlessly connecting your Telegram bots directly to the powerful SkyPay payment gateway.</p>
+            <p>A lightweight, serverless bridge seamlessly connecting your Telegram bots directly to the powerful SB_Pay payment gateway.</p>
             
             <div class="hero-buttons">
                 <a href="#api-docs" class="btn btn-primary">View Documentation</a>
@@ -674,9 +674,9 @@
             <div class="hero-diagram">
                 <span>Telegram Bot</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                <span>SkyPay Middleware</span>
+                <span>SB_Pay Middleware</span>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                <span>SkyPay Gateway</span>
+                <span>SB_Pay Gateway</span>
             </div>
         </div>
     </section>
@@ -744,21 +744,21 @@
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h4>Initiate Request</h4>
-                        <p>Your Telegram bot sends a standard JSON payment request to the SkyPay Middleware API containing user details and amount.</p>
+                        <p>Your Telegram bot sends a standard JSON payment request to the SB_Pay Middleware API containing user details and amount.</p>
                     </div>
                 </div>
                 <div class="flow-step">
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <h4>Gateway Creation</h4>
-                        <p>The Middleware securely authenticates and creates the payment intent with the core SkyPay Gateway.</p>
+                        <p>The Middleware securely authenticates and creates the payment intent with the core SB_Pay Gateway.</p>
                     </div>
                 </div>
                 <div class="flow-step">
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h4>User Checkout</h4>
-                        <p>You send the returned `payment_url` to the user. They open it and complete the transaction on the SkyPay checkout page.</p>
+                        <p>You send the returned `payment_url` to the user. They open it and complete the transaction on the SB_Pay checkout page.</p>
                     </div>
                 </div>
                 <div class="flow-step">
@@ -783,7 +783,7 @@
         <div class="container">
             <div style="margin-bottom: 4rem;">
                 <h2 style="font-size: 2.25rem; margin-bottom: 1rem;">API Reference</h2>
-                <p>Complete documentation for integrating the SkyPay Middleware into your bot application.</p>
+                <p>Complete documentation for integrating the SB_Pay Middleware into your bot application.</p>
             </div>
 
             <div class="api-section">
@@ -833,7 +833,7 @@
                                 <span class="param-name">domain</span>
                                 <span class="param-type">string</span>
                             </div>
-                            <span style="color:var(--text-muted);font-size:0.9rem;">Your primary gateway domain (e.g., https://pay.skypaybd.top).</span>
+                            <span style="color:var(--text-muted);font-size:0.9rem;">Your primary gateway domain (e.g., https://pay.teamsbapp.com).</span>
                         </li>
                     </ul>
                 </div>
@@ -854,7 +854,7 @@
   "key": "your-api-brand-secret-key",
   "amount": "100",
   "user_id": "123456789",
-  "domain": "https://pay.skypaybd.top"
+  "domain": "https://pay.teamsbapp.com"
 }</code></pre>
                         </div>
                     </div>
@@ -884,7 +884,7 @@
             <div class="api-section">
                 <div class="api-text">
                     <h3>GET /pay/{id}</h3>
-                    <p>This endpoint handles the user checkout process. Send the user to the `payment_url` returned from the `/api` creation step. This route automatically redirects the user to the generated SkyPay checkout UI.</p>
+                    <p>This endpoint handles the user checkout process. Send the user to the `payment_url` returned from the `/api` creation step. This route automatically redirects the user to the generated SB_Pay checkout UI.</p>
                 </div>
                 <div class="api-code-blocks">
                     <div class="code-window">
@@ -984,7 +984,7 @@ $payload = json_encode([
     "key" => "YOUR_SECRET_KEY",
     "amount" => "500",
     "user_id" => "123456789",
-    "domain" => "https://pay.skypaybd.top"
+    "domain" => "https://pay.teamsbapp.com"
 ]);
 
 $ch = curl_init('https://middleware-domain.com/api');
@@ -1040,7 +1040,7 @@ bot.onText(/\/pay/, async (msg) => {
       key: "YOUR_SECRET_KEY",
       amount: "100",
       user_id: chatId.toString(),
-      domain: "https://pay.skypaybd.top"
+      domain: "https://pay.teamsbapp.com"
     })
   });
 
@@ -1070,9 +1070,9 @@ bot.onText(/\/pay/, async (msg) => {
                 <div class="footer-brand">
                     <div class="brand">
                         <div class="brand-logo" style="width: 28px; height: 28px; font-size: 0.9rem;">S</div>
-                        SkyPay
+                        SB_Pay
                     </div>
-                    <p>A lightweight, serverless bridge providing a seamless developer experience between Telegram bots and the SkyPay gateway.</p>
+                    <p>A lightweight, serverless bridge providing a seamless developer experience between Telegram bots and the SB_Pay gateway.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Developers</h4>
@@ -1092,7 +1092,7 @@ bot.onText(/\/pay/, async (msg) => {
                 </div>
             </div>
             <div class="footer-bottom">
-                &copy; 2026 SkyPay Systems. All rights reserved.
+                &copy; 2026 SB_Pay Systems. All rights reserved.
             </div>
         </div>
     </footer>
