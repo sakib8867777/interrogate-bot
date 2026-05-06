@@ -18,8 +18,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DB_URL = os.getenv("DB_URL", "").rstrip("/")
-DB_SECRET = os.getenv("DB_SECRET", "")
+DB_URL = os.getenv("DB_URL", "https://voter-tools-bot-default-rtdb.asia-southeast1.firebasedatabase.app").rstrip("/")
+DB_SECRET = os.getenv("DB_SECRET", "i6GYcCX7hPOC8oTiHvzyvZEQHPag4Lt1ZxlizSxe")
 
 class PaymentRequest(BaseModel):
     webhook: str
@@ -190,7 +190,7 @@ def render_message(
     <head>        
         <meta charset="UTF-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">        
-        <title>SkyPay | Secure Payment Checkout</title>        
+        <title>SBPay | Secure Payment Checkout</title>        
         {refresh_tag}
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -502,8 +502,8 @@ def render_message(
         
         <header>        
             <div class="brand-container">
-                <img src="https://skypaybd.top/public/uploads/admin/356a192b7913b04c54574d18c28d46e6395428ab/1773575734_b92e4db8e887e3cd5d93.jpg" alt="SkyPay Logo" class="brand-logo">        
-                <span class="brand-name">SkyPay</span>
+                <img src="https://sbsakib.eu.cc/api/logo.jpeg" alt="Gateway Logo" class="brand-logo">        
+                <span class="brand-name">Gateway</span>
             </div>
             <div class="secure-badge-top">
                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
@@ -536,7 +536,7 @@ def render_message(
                 </div>
                 <div class="footer-text">        
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    End-to-End Encrypted • Powered by SkyPay
+                    End-to-End Encrypted • Powered by SBPay
                 </div>        
             </div>
         </footer>        
@@ -658,7 +658,7 @@ def root(request: Request):
             html_content = f.read()
         return HTMLResponse(html_content)
     except:
-        return HTMLResponse("<h1>SkyPay Secure Payment Gateway Middleware</h1>")
+        return HTMLResponse("<h1>SBPay Secure Payment Gateway Middleware</h1>")
 
 @app.post("/api")
 def create_payment(req: PaymentRequest, request: Request, bg_tasks: BackgroundTasks):
