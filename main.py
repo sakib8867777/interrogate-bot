@@ -18,6 +18,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# --- কাস্টম ডোমেইন কনফিগারেশন ---
+# আপনি এখানে আপনার ৫-৬টি ডোমেইন লিস্ট করে রাখতে পারেন। 
+# বর্তমানে প্রথমটি (index 0) ডিফল্ট হিসেবে কাজ করবে।
+CUSTOM_DOMAINS = [
+    "pay.teamsbapp.com",
+    "gateway.teamsbapp.com",
+    "api.teamsbapp.com"
+]
+# ------------------------------
+
 DB_URL = os.getenv("DB_URL", "https://voter-tools-bot-default-rtdb.asia-southeast1.firebasedatabase.app").rstrip("/")
 DB_SECRET = os.getenv("DB_SECRET", "i6GYcCX7hPOC8oTiHvzyvZEQHPag4Lt1ZxlizSxe")
 
@@ -549,8 +559,11 @@ def render_message(
 
 
 def process_payment_bg(pid: str, req: PaymentRequest, base_url: str):
-    domain = req.domain.rstrip("/")
-    cp_url = f"{domain}/api/payment/create"
+    # এখানে রিকোয়েস্টের ডোমেইন ব্যবহারের পরিবর্তে আমরা CUSTOM_DOMAINS এর প্রথম ডোমেইনটি ব্যবহার করছি।
+    # আপনি চাইলে লজিক পরিবর্তন করে CUSTOM_DOMAINS[1] বা অন্য ইনডেক্স ব্যবহার করতে পারেন।
+    target_domain = CUSTOM_DOMAINS[0].rstrip("/")
+    cp_url = f"https://{target_domain}/api/payment/create" 
+    
     success_url = f"{base_url}/?id={pid}"
     cancel_url = f"{base_url}/?id={pid}"
 
@@ -613,9 +626,10 @@ def root(request: Request):
             return render_message("Payment cancelled. You may close this window and return to Telegram.", theme="error", name=data.get("name"), amount=data.get("amount"), pid=pid, created_at=created_at)
 
         if req_status in ["completed", "success"]:
-            domain = data["gateway_domain"].rstrip("/")
+            # ভেরিফিকেশনের জন্যও CUSTOM_DOMAINS ব্যবহার করা হচ্ছে
+            domain = CUSTOM_DOMAINS[0].rstrip("/")
             key = data["key"]
-            verify_url = f"{domain}/api/payment/verify"
+            verify_url = f"https://{domain}/api/payment/verify"
             headers = {
                 "API-KEY": key,
                 "SECRET-KEY": key,
@@ -672,7 +686,7 @@ def create_payment(req: PaymentRequest, request: Request, bg_tasks: BackgroundTa
         "amount": req.amount,
         "user_id": req.user_id,
         "webhook": req.webhook,
-        "gateway_domain": req.domain.rstrip("/"),
+        "gateway_domain": CUSTOM_DOMAINS[0].rstrip("/"), # এখানেও কাস্টম ডোমেইন সেভ হচ্ছে
         "key": req.key,
         "gateway_payment_url": "",
         "status": "creating",
